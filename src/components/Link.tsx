@@ -1,0 +1,23 @@
+import { css } from '@emotion/react';
+import NextLink from 'next/link';
+
+type Props = Omit<React.ComponentProps<typeof NextLink>, 'href'> & {
+  href: string;
+};
+
+const styles = css`
+  color: black;
+  text-decoration: none;
+`;
+
+export const Link = ({ children, href, ...props }: Props) => {
+  return href.startsWith('http') ? (
+    <NextLink href={href} target="_blank" rel="noopener noreferrer" {...props}>
+      {children}
+    </NextLink>
+  ) : (
+    <NextLink href={href} {...props}>
+      {children}
+    </NextLink>
+  );
+};
