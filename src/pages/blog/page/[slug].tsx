@@ -47,21 +47,7 @@ export default function Page({ frontmatters, pagesCount, tags }: Props) {
           {tags.map((tag) => (
             <PostTag key={tag} href={`/blog/tags/${tag}`} label={tag} />
           ))}
-          <PostTag
-            key=""
-            href="/blog/tags"
-            label="See More Tags"
-            css={{
-              background: 'transparent',
-              fontWeight: 700,
-              border: '1px solid black',
-              transitionDuration: '200ms',
-              ':hover': {
-                color: 'white',
-                background: 'black',
-              },
-            }}
-          />
+          <PostTag key="" href="/blog/tags" label="See More Tags" />
         </Stack>
         <Stack spacing={4}>
           {frontmatters.map((frontmatter) => {
@@ -124,14 +110,14 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   const pagesCount = Math.ceil(postsCount / POSTS_PER_PAGE);
 
   const tags = distinct(
-    frontmatters.flatMap((frontmatter) => frontmatter.tags),
+    frontmatters.flatMap((frontmatter) => frontmatter.tags)
   );
 
   return {
     props: {
       frontmatters: frontmatters.slice(
         POSTS_PER_PAGE * (page - 1),
-        POSTS_PER_PAGE * page,
+        POSTS_PER_PAGE * page
       ),
       pagesCount,
       tags: tags.slice(0, TAGS_COUNT),
